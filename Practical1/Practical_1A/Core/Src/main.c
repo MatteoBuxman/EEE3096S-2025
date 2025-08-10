@@ -1,3 +1,4 @@
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -45,6 +46,11 @@ TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 // TODO: Define input variables
+static uint8_t led_pattern = 1;           // Current LED pattern (1-3, start with mode 1)
+static uint8_t led_step = 0;              // Current step in pattern
+static uint16_t timer_period = 1000;      // Timer period in ms (default 1 second)
+static uint8_t button_state[4] = {1,1,1,1}; // Previous button states for debouncing
+static uint8_t button_pressed[4] = {0,0,0,0}; // Button press flags
 
 
 /* USER CODE END PV */
@@ -56,7 +62,9 @@ static void MX_TIM16_Init(void);
 /* USER CODE BEGIN PFP */
 void TIM16_IRQHandler(void);
 /* USER CODE END PFP */
-
+void update_led_pattern(void);
+void check_buttons(void);
+void set_timer_period(uint16_t period);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
@@ -108,7 +116,10 @@ int main(void)
 
     // TODO: Check pushbuttons to change timer delay
 
+	  check_buttons();
 
+	      // Small delay to prevent excessive button checking
+	      HAL_Delay(50);
     
 
   }
@@ -323,11 +334,181 @@ void TIM16_IRQHandler(void)
 
 	// TODO: Change LED pattern
 
-
+	update_led_pattern();
 
 }
 
+void update_led_pattern(void)
+{
+    // Clear all LEDs first
+    LL_GPIO_ResetOutputPin(LED0_GPIO_Port, LED0_Pin);
+    LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
+    LL_GPIO_ResetOutputPin(LED2_GPIO_Port, LED2_Pin);
+    LL_GPIO_ResetOutputPin(LED3_GPIO_Port, LED3_Pin);
+    LL_GPIO_ResetOutputPin(LED4_GPIO_Port, LED4_Pin);
+    LL_GPIO_ResetOutputPin(LED5_GPIO_Port, LED5_Pin);
+    LL_GPIO_ResetOutputPin(LED6_GPIO_Port, LED6_Pin);
+    LL_GPIO_ResetOutputPin(LED7_GPIO_Port, LED7_Pin);
 
+    switch(led_pattern)
+    {
+        case 1: // Mode 1: Running light (single LED moving left to right)
+            switch(led_step)
+            {
+                case 0: LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin); break;
+                case 1: LL_GPIO_SetOutputPin(LED1_GPIO_Port, LED1_Pin); break;
+                case 2: LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin); break;
+                case 3: LL_GPIO_SetOutputPin(LED3_GPIO_Port, LED3_Pin); break;
+                case 4: LL_GPIO_SetOutputPin(LED4_GPIO_Port, LED4_Pin); break;
+                case 5: LL_GPIO_SetOutputPin(LED5_GPIO_Port, LED5_Pin); break;
+                case 6: LL_GPIO_SetOutputPin(LED6_GPIO_Port, LED6_Pin); break;
+                case 7: LL_GPIO_SetOutputPin(LED7_GPIO_Port, LED7_Pin); break;
+            }
+            led_step = (led_step + 1) % 8;
+            break;
+
+            case 2: // Mode 2: Ping pong (LED bouncing back and forth continuously)
+                       {
+                           static uint8_t direction = 0; // 0 = moving right, 1 = moving left
+
+                           // Light up the current LED
+                           switch(led_step)
+                           {
+                               case 0: LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin); break;
+                               case 1: LL_GPIO_SetOutputPin(LED1_GPIO_Port, LED1_Pin); break;
+                               case 2: LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin); break;
+                               case 3: LL_GPIO_SetOutputPin(LED3_GPIO_Port, LED3_Pin); break;
+                               case 4: LL_GPIO_SetOutputPin(LED4_GPIO_Port, LED4_Pin); break;
+                               case 5: LL_GPIO_SetOutputPin(LED5_GPIO_Port, LED5_Pin); break;
+                               case 6: LL_GPIO_SetOutputPin(LED6_GPIO_Port, LED6_Pin); break;
+                               case 7: LL_GPIO_SetOutputPin(LED7_GPIO_Port, LED7_Pin); break;
+                           }
+
+                           // Move to next position based on direction
+                           if(direction == 0) //
+                           {
+                               led_step++;
+                               if(led_step >= 7) // Reached right end, reverse direction
+                               {
+                                   direction = 1; // Now move left
+                               }
+                           }
+                           else //
+                           {
+                               led_step--;
+                               if(led_step <= 0) // Reached left end, reverse direction
+                               {
+                                   direction = 0; // Now move right
+                               }
+                           }
+                       }
+                       break;
+
+        case 3: // Mode 3: Alternating pattern (odd/even LEDs alternate)
+            if(led_step % 2 == 0)
+            {
+                LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
+                LL_GPIO_SetOutputPin(LED2_GPIO_Port, LED2_Pin);
+                LL_GPIO_SetOutputPin(LED4_GPIO_Port, LED4_Pin);
+                LL_GPIO_SetOutputPin(LED6_GPIO_Port, LED6_Pin);
+            }
+            else
+            {
+                LL_GPIO_SetOutputPin(LED1_GPIO_Port, LED1_Pin);
+                LL_GPIO_SetOutputPin(LED3_GPIO_Port, LED3_Pin);
+                LL_GPIO_SetOutputPin(LED5_GPIO_Port, LED5_Pin);
+                LL_GPIO_SetOutputPin(LED7_GPIO_Port, LED7_Pin);
+            }
+            led_step++;
+            break;
+
+        default: // Default to Mode 1 if invalid pattern
+            led_pattern = 1;
+            led_step = 0;
+            break;
+    }
+}
+void check_buttons(void)
+{
+    uint8_t current_state[4];
+
+    // Read current button states (active low)
+    current_state[0] = !LL_GPIO_IsInputPinSet(Button0_GPIO_Port, Button0_Pin);
+    current_state[1] = !LL_GPIO_IsInputPinSet(Button1_GPIO_Port, Button1_Pin);
+    current_state[2] = !LL_GPIO_IsInputPinSet(Button2_GPIO_Port, Button2_Pin);
+    current_state[3] = !LL_GPIO_IsInputPinSet(Button3_GPIO_Port, Button3_Pin);
+
+    // Check for button press events (transition from 0 to 1)
+    for(int i = 0; i < 4; i++)
+    {
+        if(current_state[i] && !button_state[i] && !button_pressed[i])
+        {
+            button_pressed[i] = 1;
+
+            switch(i)
+            {
+                case 0: // Button 0: Change delay speed (cycle through different speeds)
+                    if(timer_period == 250)         // Very fast
+                        timer_period = 500;         // Fast
+                    else if(timer_period == 500)
+                        timer_period = 1000;        // Normal
+                    else if(timer_period == 1000)
+                        timer_period = 1500;        // Slow
+                    else if(timer_period == 1500)
+                        timer_period = 2000;        // Very slow
+                    else
+                        timer_period = 250;         // Back to very fast
+
+                    set_timer_period(timer_period);
+                    break;
+
+                case 1: // Button 1: Set LED pattern mode 1
+                    led_pattern = 1;
+                    led_step = 0; // Reset step counter
+                    break;
+
+                case 2: // Button 2: Set LED pattern mode 2
+                    led_pattern = 2;
+                    led_step = 0; // Reset step counter
+                    break;
+
+                case 3: // Button 3: Set LED pattern mode 3
+                    led_pattern = 3;
+                    led_step = 0; // Reset step counter
+                    break;
+            }
+        }
+
+        // Clear button pressed flag when button is released
+        if(!current_state[i])
+        {
+            button_pressed[i] = 0;
+        }
+
+        // Update previous state
+        button_state[i] = current_state[i];
+    }
+}
+
+/**
+  * @brief  Set new timer period
+  * @param  period: New period in milliseconds
+  * @retval None
+  */
+void set_timer_period(uint16_t period)
+{
+    // Stop timer
+    HAL_TIM_Base_Stop_IT(&htim16);
+
+    // Update period (period in ms, timer runs at 1kHz)
+    htim16.Init.Period = period - 1;
+
+    // Reinitialize timer
+    HAL_TIM_Base_Init(&htim16);
+
+    // Restart timer
+    HAL_TIM_Base_Start_IT(&htim16);
+}
 /* USER CODE END 4 */
 
 /**
