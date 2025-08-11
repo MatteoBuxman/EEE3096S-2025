@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
   29:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****        devices contains the following additional features
   30:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
   31:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****        (+) Possibility to disable or enable Analog Noise Filter
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 2
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 2
 
 
   32:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****        (+) Use of a configured Digital Noise Filter
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
   86:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   * @{
   87:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   */
   88:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 3
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 3
 
 
   89:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** /**
@@ -173,18 +173,18 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
   60              		.loc 1 105 5 discriminator 2 view .LVU10
  106:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  107:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
-  61              		.loc 1 107 5 discriminator 2 view .LVU11
-  62              		.loc 1 107 17 is_stmt 0 discriminator 2 view .LVU12
+  61              		.loc 1 107 5 view .LVU11
+  62              		.loc 1 107 17 is_stmt 0 view .LVU12
   63 0018 4125     		movs	r5, #65
   64 001a 2423     		movs	r3, #36
   65 001c 4355     		strb	r3, [r0, r5]
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 4
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 4
 
 
  108:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  109:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
  110:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
-  66              		.loc 1 110 5 is_stmt 1 discriminator 2 view .LVU13
+  66              		.loc 1 110 5 is_stmt 1 view .LVU13
   67 001e 0668     		ldr	r6, [r0]
   68 0020 3368     		ldr	r3, [r6]
   69 0022 9343     		bics	r3, r2
@@ -192,56 +192,56 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  111:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  112:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Reset I2Cx ANOFF bit */
  113:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 &= ~(I2C_CR1_ANFOFF);
-  71              		.loc 1 113 5 discriminator 2 view .LVU14
-  72              		.loc 1 113 9 is_stmt 0 discriminator 2 view .LVU15
+  71              		.loc 1 113 5 view .LVU14
+  72              		.loc 1 113 9 is_stmt 0 view .LVU15
   73 0026 0668     		ldr	r6, [r0]
-  74              		.loc 1 113 19 discriminator 2 view .LVU16
+  74              		.loc 1 113 19 view .LVU16
   75 0028 3368     		ldr	r3, [r6]
-  76              		.loc 1 113 25 discriminator 2 view .LVU17
+  76              		.loc 1 113 25 view .LVU17
   77 002a 0A4F     		ldr	r7, .L5
   78 002c 3B40     		ands	r3, r7
   79 002e 3360     		str	r3, [r6]
  114:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  115:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Set analog filter bit*/
  116:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 |= AnalogFilter;
-  80              		.loc 1 116 5 is_stmt 1 discriminator 2 view .LVU18
-  81              		.loc 1 116 9 is_stmt 0 discriminator 2 view .LVU19
+  80              		.loc 1 116 5 is_stmt 1 view .LVU18
+  81              		.loc 1 116 9 is_stmt 0 view .LVU19
   82 0030 0668     		ldr	r6, [r0]
-  83              		.loc 1 116 19 discriminator 2 view .LVU20
+  83              		.loc 1 116 19 view .LVU20
   84 0032 3368     		ldr	r3, [r6]
-  85              		.loc 1 116 25 discriminator 2 view .LVU21
+  85              		.loc 1 116 25 view .LVU21
   86 0034 0B43     		orrs	r3, r1
   87 0036 3360     		str	r3, [r6]
  117:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  118:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
-  88              		.loc 1 118 5 is_stmt 1 discriminator 2 view .LVU22
+  88              		.loc 1 118 5 is_stmt 1 view .LVU22
   89 0038 0168     		ldr	r1, [r0]
   90              	.LVL1:
-  91              		.loc 1 118 5 is_stmt 0 discriminator 2 view .LVU23
+  91              		.loc 1 118 5 is_stmt 0 view .LVU23
   92 003a 0B68     		ldr	r3, [r1]
   93 003c 1343     		orrs	r3, r2
   94 003e 0B60     		str	r3, [r1]
  119:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  120:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
-  95              		.loc 1 120 5 is_stmt 1 discriminator 2 view .LVU24
-  96              		.loc 1 120 17 is_stmt 0 discriminator 2 view .LVU25
+  95              		.loc 1 120 5 is_stmt 1 view .LVU24
+  96              		.loc 1 120 17 is_stmt 0 view .LVU25
   97 0040 2023     		movs	r3, #32
   98 0042 4355     		strb	r3, [r0, r5]
  121:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  122:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Process Unlocked */
  123:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
-  99              		.loc 1 123 5 is_stmt 1 discriminator 2 view .LVU26
- 100              		.loc 1 123 5 discriminator 2 view .LVU27
+  99              		.loc 1 123 5 is_stmt 1 view .LVU26
+ 100              		.loc 1 123 5 view .LVU27
  101 0044 0023     		movs	r3, #0
  102 0046 0355     		strb	r3, [r0, r4]
- 103              		.loc 1 123 5 discriminator 2 view .LVU28
+ 103              		.loc 1 123 5 view .LVU28
  124:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  125:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     return HAL_OK;
- 104              		.loc 1 125 5 discriminator 2 view .LVU29
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 5
+ 104              		.loc 1 125 5 view .LVU29
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 5
 
 
- 105              		.loc 1 125 12 is_stmt 0 discriminator 2 view .LVU30
+ 105              		.loc 1 125 12 is_stmt 0 view .LVU30
  106 0048 0020     		movs	r0, #0
  107              	.LVL2:
  108              	.L2:
@@ -266,11 +266,11 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  119              	.LVL5:
  120              	.L4:
  105:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 121              		.loc 1 105 5 view .LVU34
+ 121              		.loc 1 105 5 discriminator 1 view .LVU34
  122 0050 0220     		movs	r0, #2
  123              	.LVL6:
  105:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 124              		.loc 1 105 5 view .LVU35
+ 124              		.loc 1 105 5 discriminator 1 view .LVU35
  125 0052 FAE7     		b	.L2
  126              	.L6:
  127              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  140:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_t DigitalFilter)
  141:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** {
  143              		.loc 1 141 1 is_stmt 1 view -0
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 6
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 6
 
 
  144              		.cfi_startproc
@@ -346,86 +346,86 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  176              		.loc 1 151 5 discriminator 2 view .LVU47
  152:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  153:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
- 177              		.loc 1 153 5 discriminator 2 view .LVU48
- 178              		.loc 1 153 17 is_stmt 0 discriminator 2 view .LVU49
+ 177              		.loc 1 153 5 view .LVU48
+ 178              		.loc 1 153 17 is_stmt 0 view .LVU49
  179 0018 4125     		movs	r5, #65
  180 001a 2423     		movs	r3, #36
  181 001c 4355     		strb	r3, [r0, r5]
  154:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  155:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
  156:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
- 182              		.loc 1 156 5 is_stmt 1 discriminator 2 view .LVU50
+ 182              		.loc 1 156 5 is_stmt 1 view .LVU50
  183 001e 0668     		ldr	r6, [r0]
  184 0020 3368     		ldr	r3, [r6]
  185 0022 9343     		bics	r3, r2
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 7
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 7
 
 
  186 0024 3360     		str	r3, [r6]
  157:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  158:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Get the old register value */
  159:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     tmpreg = hi2c->Instance->CR1;
- 187              		.loc 1 159 5 discriminator 2 view .LVU51
- 188              		.loc 1 159 18 is_stmt 0 discriminator 2 view .LVU52
+ 187              		.loc 1 159 5 view .LVU51
+ 188              		.loc 1 159 18 is_stmt 0 view .LVU52
  189 0026 0668     		ldr	r6, [r0]
- 190              		.loc 1 159 12 discriminator 2 view .LVU53
+ 190              		.loc 1 159 12 view .LVU53
  191 0028 3368     		ldr	r3, [r6]
  192              	.LVL8:
  160:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  161:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Reset I2Cx DNF bits [11:8] */
  162:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     tmpreg &= ~(I2C_CR1_DNF);
- 193              		.loc 1 162 5 is_stmt 1 discriminator 2 view .LVU54
- 194              		.loc 1 162 12 is_stmt 0 discriminator 2 view .LVU55
+ 193              		.loc 1 162 5 is_stmt 1 view .LVU54
+ 194              		.loc 1 162 12 is_stmt 0 view .LVU55
  195 002a 094F     		ldr	r7, .L11
  196 002c 3B40     		ands	r3, r7
  197              	.LVL9:
  163:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  164:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Set I2Cx DNF coefficient */
  165:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     tmpreg |= DigitalFilter << 8U;
- 198              		.loc 1 165 5 is_stmt 1 discriminator 2 view .LVU56
- 199              		.loc 1 165 29 is_stmt 0 discriminator 2 view .LVU57
+ 198              		.loc 1 165 5 is_stmt 1 view .LVU56
+ 199              		.loc 1 165 29 is_stmt 0 view .LVU57
  200 002e 0902     		lsls	r1, r1, #8
  201              	.LVL10:
- 202              		.loc 1 165 12 discriminator 2 view .LVU58
+ 202              		.loc 1 165 12 view .LVU58
  203 0030 1943     		orrs	r1, r3
  204              	.LVL11:
  166:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  167:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Store the new register value */
  168:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 = tmpreg;
- 205              		.loc 1 168 5 is_stmt 1 discriminator 2 view .LVU59
- 206              		.loc 1 168 25 is_stmt 0 discriminator 2 view .LVU60
+ 205              		.loc 1 168 5 is_stmt 1 view .LVU59
+ 206              		.loc 1 168 25 is_stmt 0 view .LVU60
  207 0032 3160     		str	r1, [r6]
  169:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  170:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
- 208              		.loc 1 170 5 is_stmt 1 discriminator 2 view .LVU61
+ 208              		.loc 1 170 5 is_stmt 1 view .LVU61
  209 0034 0168     		ldr	r1, [r0]
  210              	.LVL12:
- 211              		.loc 1 170 5 is_stmt 0 discriminator 2 view .LVU62
+ 211              		.loc 1 170 5 is_stmt 0 view .LVU62
  212 0036 0B68     		ldr	r3, [r1]
  213 0038 1343     		orrs	r3, r2
  214 003a 0B60     		str	r3, [r1]
  215              	.LVL13:
  171:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  172:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
- 216              		.loc 1 172 5 is_stmt 1 discriminator 2 view .LVU63
- 217              		.loc 1 172 17 is_stmt 0 discriminator 2 view .LVU64
+ 216              		.loc 1 172 5 is_stmt 1 view .LVU63
+ 217              		.loc 1 172 17 is_stmt 0 view .LVU64
  218 003c 2023     		movs	r3, #32
  219 003e 4355     		strb	r3, [r0, r5]
  173:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  174:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Process Unlocked */
  175:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
- 220              		.loc 1 175 5 is_stmt 1 discriminator 2 view .LVU65
- 221              		.loc 1 175 5 discriminator 2 view .LVU66
+ 220              		.loc 1 175 5 is_stmt 1 view .LVU65
+ 221              		.loc 1 175 5 view .LVU66
  222 0040 0023     		movs	r3, #0
  223 0042 0355     		strb	r3, [r0, r4]
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 8
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 8
 
 
- 224              		.loc 1 175 5 discriminator 2 view .LVU67
+ 224              		.loc 1 175 5 view .LVU67
  176:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  177:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     return HAL_OK;
- 225              		.loc 1 177 5 discriminator 2 view .LVU68
- 226              		.loc 1 177 12 is_stmt 0 discriminator 2 view .LVU69
+ 225              		.loc 1 177 5 view .LVU68
+ 226              		.loc 1 177 12 is_stmt 0 view .LVU69
  227 0044 0020     		movs	r0, #0
  228              	.LVL14:
  229              	.L8:
@@ -450,11 +450,11 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  240              	.LVL17:
  241              	.L10:
  151:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 242              		.loc 1 151 5 view .LVU73
+ 242              		.loc 1 151 5 discriminator 1 view .LVU73
  243 004c 0220     		movs	r0, #2
  244              	.LVL18:
  151:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 245              		.loc 1 151 5 view .LVU74
+ 245              		.loc 1 151 5 discriminator 1 view .LVU74
  246 004e FAE7     		b	.L8
  247              	.L12:
  248              		.align	2
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  188:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  189:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** /** @defgroup I2CEx_Exported_Functions_Group2 WakeUp Mode Functions
  190:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   * @brief    WakeUp Mode Functions
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 9
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 9
 
 
  191:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   *
@@ -538,21 +538,21 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  291 0012 4021     		movs	r1, #64
  292 0014 0122     		movs	r2, #1
  293 0016 4254     		strb	r2, [r0, r1]
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 10
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 10
 
 
  294              		.loc 1 217 5 discriminator 2 view .LVU84
  218:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  219:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
- 295              		.loc 1 219 5 discriminator 2 view .LVU85
- 296              		.loc 1 219 17 is_stmt 0 discriminator 2 view .LVU86
+ 295              		.loc 1 219 5 view .LVU85
+ 296              		.loc 1 219 17 is_stmt 0 view .LVU86
  297 0018 4124     		movs	r4, #65
  298 001a 2423     		movs	r3, #36
  299 001c 0355     		strb	r3, [r0, r4]
  220:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  221:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
  222:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
- 300              		.loc 1 222 5 is_stmt 1 discriminator 2 view .LVU87
+ 300              		.loc 1 222 5 is_stmt 1 view .LVU87
  301 001e 0568     		ldr	r5, [r0]
  302 0020 2B68     		ldr	r3, [r5]
  303 0022 9343     		bics	r3, r2
@@ -560,45 +560,45 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  223:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  224:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Enable wakeup from stop mode */
  225:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 |= I2C_CR1_WUPEN;
- 305              		.loc 1 225 5 discriminator 2 view .LVU88
- 306              		.loc 1 225 9 is_stmt 0 discriminator 2 view .LVU89
+ 305              		.loc 1 225 5 view .LVU88
+ 306              		.loc 1 225 9 is_stmt 0 view .LVU89
  307 0026 0568     		ldr	r5, [r0]
- 308              		.loc 1 225 19 discriminator 2 view .LVU90
+ 308              		.loc 1 225 19 view .LVU90
  309 0028 2E68     		ldr	r6, [r5]
- 310              		.loc 1 225 25 discriminator 2 view .LVU91
+ 310              		.loc 1 225 25 view .LVU91
  311 002a 8023     		movs	r3, #128
  312 002c DB02     		lsls	r3, r3, #11
  313 002e 3343     		orrs	r3, r6
  314 0030 2B60     		str	r3, [r5]
  226:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  227:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
- 315              		.loc 1 227 5 is_stmt 1 discriminator 2 view .LVU92
+ 315              		.loc 1 227 5 is_stmt 1 view .LVU92
  316 0032 0568     		ldr	r5, [r0]
  317 0034 2B68     		ldr	r3, [r5]
  318 0036 1343     		orrs	r3, r2
  319 0038 2B60     		str	r3, [r5]
  228:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  229:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
- 320              		.loc 1 229 5 discriminator 2 view .LVU93
- 321              		.loc 1 229 17 is_stmt 0 discriminator 2 view .LVU94
+ 320              		.loc 1 229 5 view .LVU93
+ 321              		.loc 1 229 17 is_stmt 0 view .LVU94
  322 003a 2023     		movs	r3, #32
  323 003c 0355     		strb	r3, [r0, r4]
  230:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  231:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Process Unlocked */
  232:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
- 324              		.loc 1 232 5 is_stmt 1 discriminator 2 view .LVU95
- 325              		.loc 1 232 5 discriminator 2 view .LVU96
+ 324              		.loc 1 232 5 is_stmt 1 view .LVU95
+ 325              		.loc 1 232 5 view .LVU96
  326 003e 0023     		movs	r3, #0
  327 0040 4354     		strb	r3, [r0, r1]
- 328              		.loc 1 232 5 discriminator 2 view .LVU97
+ 328              		.loc 1 232 5 view .LVU97
  233:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  234:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     return HAL_OK;
- 329              		.loc 1 234 5 discriminator 2 view .LVU98
- 330              		.loc 1 234 12 is_stmt 0 discriminator 2 view .LVU99
+ 329              		.loc 1 234 5 view .LVU98
+ 330              		.loc 1 234 12 is_stmt 0 view .LVU99
  331 0042 0020     		movs	r0, #0
  332              	.LVL20:
  333              	.L14:
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 11
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 11
 
 
  235:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   }
@@ -622,11 +622,11 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  344              	.LVL23:
  345              	.L16:
  217:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 346              		.loc 1 217 5 view .LVU103
+ 346              		.loc 1 217 5 discriminator 1 view .LVU103
  347 004a 0220     		movs	r0, #2
  348              	.LVL24:
  217:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 349              		.loc 1 217 5 view .LVU104
+ 349              		.loc 1 217 5 discriminator 1 view .LVU104
  350 004c FAE7     		b	.L14
  351              		.cfi_endproc
  352              	.LFE42:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  371              		.cfi_def_cfa_offset 16
  372              		.cfi_offset 4, -16
  373              		.cfi_offset 5, -12
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 12
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 12
 
 
  374              		.cfi_offset 6, -8
@@ -691,15 +691,15 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  394              		.loc 1 256 5 discriminator 2 view .LVU114
  257:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  258:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
- 395              		.loc 1 258 5 discriminator 2 view .LVU115
- 396              		.loc 1 258 17 is_stmt 0 discriminator 2 view .LVU116
+ 395              		.loc 1 258 5 view .LVU115
+ 396              		.loc 1 258 17 is_stmt 0 view .LVU116
  397 0018 4124     		movs	r4, #65
  398 001a 2423     		movs	r3, #36
  399 001c 0355     		strb	r3, [r0, r4]
  259:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  260:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
  261:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
- 400              		.loc 1 261 5 is_stmt 1 discriminator 2 view .LVU117
+ 400              		.loc 1 261 5 is_stmt 1 view .LVU117
  401 001e 0568     		ldr	r5, [r0]
  402 0020 2B68     		ldr	r3, [r5]
  403 0022 9343     		bics	r3, r2
@@ -707,43 +707,43 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  262:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  263:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Enable wakeup from stop mode */
  264:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 &= ~(I2C_CR1_WUPEN);
- 405              		.loc 1 264 5 discriminator 2 view .LVU118
- 406              		.loc 1 264 9 is_stmt 0 discriminator 2 view .LVU119
+ 405              		.loc 1 264 5 view .LVU118
+ 406              		.loc 1 264 9 is_stmt 0 view .LVU119
  407 0026 0568     		ldr	r5, [r0]
- 408              		.loc 1 264 19 discriminator 2 view .LVU120
+ 408              		.loc 1 264 19 view .LVU120
  409 0028 2B68     		ldr	r3, [r5]
- 410              		.loc 1 264 25 discriminator 2 view .LVU121
+ 410              		.loc 1 264 25 view .LVU121
  411 002a 084E     		ldr	r6, .L21
  412 002c 3340     		ands	r3, r6
  413 002e 2B60     		str	r3, [r5]
  265:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  266:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 13
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 13
 
 
- 414              		.loc 1 266 5 is_stmt 1 discriminator 2 view .LVU122
+ 414              		.loc 1 266 5 is_stmt 1 view .LVU122
  415 0030 0568     		ldr	r5, [r0]
  416 0032 2B68     		ldr	r3, [r5]
  417 0034 1343     		orrs	r3, r2
  418 0036 2B60     		str	r3, [r5]
  267:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  268:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
- 419              		.loc 1 268 5 discriminator 2 view .LVU123
- 420              		.loc 1 268 17 is_stmt 0 discriminator 2 view .LVU124
+ 419              		.loc 1 268 5 view .LVU123
+ 420              		.loc 1 268 17 is_stmt 0 view .LVU124
  421 0038 2023     		movs	r3, #32
  422 003a 0355     		strb	r3, [r0, r4]
  269:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  270:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     /* Process Unlocked */
  271:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
- 423              		.loc 1 271 5 is_stmt 1 discriminator 2 view .LVU125
- 424              		.loc 1 271 5 discriminator 2 view .LVU126
+ 423              		.loc 1 271 5 is_stmt 1 view .LVU125
+ 424              		.loc 1 271 5 view .LVU126
  425 003c 0023     		movs	r3, #0
  426 003e 4354     		strb	r3, [r0, r1]
- 427              		.loc 1 271 5 discriminator 2 view .LVU127
+ 427              		.loc 1 271 5 view .LVU127
  272:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
  273:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****     return HAL_OK;
- 428              		.loc 1 273 5 discriminator 2 view .LVU128
- 429              		.loc 1 273 12 is_stmt 0 discriminator 2 view .LVU129
+ 428              		.loc 1 273 5 view .LVU128
+ 429              		.loc 1 273 12 is_stmt 0 view .LVU129
  430 0040 0020     		movs	r0, #0
  431              	.LVL26:
  432              	.L18:
@@ -768,17 +768,17 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  443              	.LVL29:
  444              	.L20:
  256:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 445              		.loc 1 256 5 view .LVU133
+ 445              		.loc 1 256 5 discriminator 1 view .LVU133
  446 0048 0220     		movs	r0, #2
  447              	.LVL30:
  256:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
- 448              		.loc 1 256 5 view .LVU134
+ 448              		.loc 1 256 5 discriminator 1 view .LVU134
  449 004a FAE7     		b	.L18
  450              	.L22:
  451              		.align	2
  452              	.L21:
  453 004c FFFFFBFF 		.word	-262145
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 14
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 14
 
 
  454              		.cfi_endproc
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  314:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   /* Check the parameter */
  315:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   assert_param(IS_I2C_FASTMODEPLUS(ConfigFastModePlus));
  476              		.loc 1 315 3 is_stmt 1 view .LVU137
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 15
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 15
 
 
  316:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c **** 
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  328:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   * @note  For I2C1, fast mode plus driving capability can be disabled on all selected
  329:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   *        I2C1 pins using I2C_FASTMODEPLUS_I2C1 parameter or independently
  330:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   *        on each one of the following pins PB6, PB7, PB8 and PB9.
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 16
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 16
 
 
  331:Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c ****   * @note  For remaining I2C1 pins (PA14, PA15...) fast mode plus driving capability
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  558              		.align	2
  559              	.L27:
  560 0020 00100240 		.word	1073876992
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 17
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 17
 
 
  561 0024 00000140 		.word	1073807360
@@ -966,33 +966,33 @@ ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 1
  563              	.LFE45:
  565              		.text
  566              	.Letext0:
- 567              		.file 2 "C:\\ST\\STM32CubeIDE_1.16.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
- 568              		.file 3 "C:\\ST\\STM32CubeIDE_1.16.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 567              		.file 2 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 568              		.file 3 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
  569              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h"
  570              		.file 5 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
  571              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h"
  572              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h"
-ARM GAS  C:\Users\User\AppData\Local\Temp\cckeNsPJ.s 			page 18
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f0xx_hal_i2c_ex.c
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:19     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:25     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 HAL_I2CEx_ConfigAnalogFilter
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:129    .text.HAL_I2CEx_ConfigAnalogFilter:00000054 $d
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:134    .text.HAL_I2CEx_ConfigDigitalFilter:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:140    .text.HAL_I2CEx_ConfigDigitalFilter:00000000 HAL_I2CEx_ConfigDigitalFilter
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:250    .text.HAL_I2CEx_ConfigDigitalFilter:00000050 $d
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:255    .text.HAL_I2CEx_EnableWakeUp:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:261    .text.HAL_I2CEx_EnableWakeUp:00000000 HAL_I2CEx_EnableWakeUp
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:355    .text.HAL_I2CEx_DisableWakeUp:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:361    .text.HAL_I2CEx_DisableWakeUp:00000000 HAL_I2CEx_DisableWakeUp
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:453    .text.HAL_I2CEx_DisableWakeUp:0000004c $d
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:458    .text.HAL_I2CEx_EnableFastModePlus:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:464    .text.HAL_I2CEx_EnableFastModePlus:00000000 HAL_I2CEx_EnableFastModePlus
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:506    .text.HAL_I2CEx_EnableFastModePlus:00000020 $d
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:512    .text.HAL_I2CEx_DisableFastModePlus:00000000 $t
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:518    .text.HAL_I2CEx_DisableFastModePlus:00000000 HAL_I2CEx_DisableFastModePlus
-C:\Users\User\AppData\Local\Temp\cckeNsPJ.s:560    .text.HAL_I2CEx_DisableFastModePlus:00000020 $d
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:19     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:25     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 HAL_I2CEx_ConfigAnalogFilter
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:129    .text.HAL_I2CEx_ConfigAnalogFilter:00000054 $d
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:134    .text.HAL_I2CEx_ConfigDigitalFilter:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:140    .text.HAL_I2CEx_ConfigDigitalFilter:00000000 HAL_I2CEx_ConfigDigitalFilter
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:250    .text.HAL_I2CEx_ConfigDigitalFilter:00000050 $d
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:255    .text.HAL_I2CEx_EnableWakeUp:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:261    .text.HAL_I2CEx_EnableWakeUp:00000000 HAL_I2CEx_EnableWakeUp
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:355    .text.HAL_I2CEx_DisableWakeUp:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:361    .text.HAL_I2CEx_DisableWakeUp:00000000 HAL_I2CEx_DisableWakeUp
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:453    .text.HAL_I2CEx_DisableWakeUp:0000004c $d
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:458    .text.HAL_I2CEx_EnableFastModePlus:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:464    .text.HAL_I2CEx_EnableFastModePlus:00000000 HAL_I2CEx_EnableFastModePlus
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:506    .text.HAL_I2CEx_EnableFastModePlus:00000020 $d
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:512    .text.HAL_I2CEx_DisableFastModePlus:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:518    .text.HAL_I2CEx_DisableFastModePlus:00000000 HAL_I2CEx_DisableFastModePlus
+C:\Users\basua\AppData\Local\Temp\ccE3CaEa.s:560    .text.HAL_I2CEx_DisableFastModePlus:00000020 $d
 
 NO UNDEFINED SYMBOLS

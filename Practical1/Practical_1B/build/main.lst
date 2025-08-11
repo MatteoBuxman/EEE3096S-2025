@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQIG65a.s 			page 1
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
   31:Core/Src/main.c **** /* USER CODE END PTD */
   32:Core/Src/main.c **** 
   33:Core/Src/main.c **** /* Private define ------------------------------------------------------------*/
-ARM GAS  /tmp/ccQIG65a.s 			page 2
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 2
 
 
   34:Core/Src/main.c **** /* USER CODE BEGIN PD */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
   88:Core/Src/main.c **** 
   89:Core/Src/main.c ****   /* USER CODE END Init */
   90:Core/Src/main.c **** 
-ARM GAS  /tmp/ccQIG65a.s 			page 3
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 3
 
 
   91:Core/Src/main.c ****   /* Configure the system clock */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  145:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
  146:Core/Src/main.c **** 
  147:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
-ARM GAS  /tmp/ccQIG65a.s 			page 4
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 4
 
 
  148:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  183:Core/Src/main.c **** 
  184:Core/Src/main.c ****   /* GPIO Ports Clock Enable */
  185:Core/Src/main.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
-ARM GAS  /tmp/ccQIG65a.s 			page 5
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 5
 
 
   45              		.loc 1 185 3 is_stmt 1 view .LVU3
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
   91              		.loc 1 193 3 is_stmt 1 view .LVU18
   92              		.loc 1 193 24 is_stmt 0 view .LVU19
   93 0044 023B     		subs	r3, r3, #2
-ARM GAS  /tmp/ccQIG65a.s 			page 6
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 6
 
 
   94 0046 0493     		str	r3, [sp, #16]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  135              		.loc 1 208 5 view .LVU28
  209:Core/Src/main.c **** 
  210:Core/Src/main.c **** }
-ARM GAS  /tmp/ccQIG65a.s 			page 7
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 7
 
 
  136              		.loc 1 210 1 is_stmt 0 view .LVU29
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  219:Core/Src/main.c **** 
  220:Core/Src/main.c **** /* USER CODE END 4 */
  221:Core/Src/main.c **** 
-ARM GAS  /tmp/ccQIG65a.s 			page 8
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 8
 
 
  222:Core/Src/main.c **** /**
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
   36:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
   37:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   38:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccQIG65a.s 			page 9
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 9
 
 
   39:Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
   93:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   94:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
   95:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  /tmp/ccQIG65a.s 			page 10
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 10
 
 
   96:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  203              		.thumb
  204              		.syntax unified
  205              	.L7:
-ARM GAS  /tmp/ccQIG65a.s 			page 11
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 11
 
 
  206              	.LBE7:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  251 0018 0223     		movs	r3, #2
  252 001a 0493     		str	r3, [sp, #16]
  151:Core/Src/main.c ****   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-ARM GAS  /tmp/ccQIG65a.s 			page 12
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 12
 
 
  253              		.loc 1 151 3 is_stmt 1 view .LVU52
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  167:Core/Src/main.c ****   {
  290              		.loc 1 167 6 discriminator 1 view .LVU70
  291 0042 0028     		cmp	r0, #0
-ARM GAS  /tmp/ccQIG65a.s 			page 13
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 13
 
 
  292 0044 03D1     		bne	.L12
@@ -778,39 +778,39 @@ ARM GAS  /tmp/ccQIG65a.s 			page 1
  129:Core/Src/main.c ****   {
  339              		.loc 1 129 9 view .LVU80
  340 000e FEE7     		b	.L14
-ARM GAS  /tmp/ccQIG65a.s 			page 14
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 14
 
 
  341              		.cfi_endproc
  342              	.LFE40:
  344              		.text
  345              	.Letext0:
- 346              		.file 3 "/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
- 347              		.file 4 "/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
+ 346              		.file 3 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+ 347              		.file 4 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
  348              		.file 5 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h"
  349              		.file 6 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
  350              		.file 7 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h"
  351              		.file 8 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h"
  352              		.file 9 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h"
  353              		.file 10 "<built-in>"
-ARM GAS  /tmp/ccQIG65a.s 			page 15
+ARM GAS  C:\Users\basua\AppData\Local\Temp\ccg9US1r.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccQIG65a.s:19     .text.MX_GPIO_Init:00000000 $t
-     /tmp/ccQIG65a.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-     /tmp/ccQIG65a.s:114    .text.MX_GPIO_Init:0000005c $d
-     /tmp/ccQIG65a.s:120    .text.calculate_mandelbrot_fixed_point_arithmetic:00000000 $t
-     /tmp/ccQIG65a.s:126    .text.calculate_mandelbrot_fixed_point_arithmetic:00000000 calculate_mandelbrot_fixed_point_arithmetic
-     /tmp/ccQIG65a.s:149    .text.calculate_mandelbrot_double:00000000 $t
-     /tmp/ccQIG65a.s:155    .text.calculate_mandelbrot_double:00000000 calculate_mandelbrot_double
-     /tmp/ccQIG65a.s:178    .text.Error_Handler:00000000 $t
-     /tmp/ccQIG65a.s:184    .text.Error_Handler:00000000 Error_Handler
-     /tmp/ccQIG65a.s:216    .text.SystemClock_Config:00000000 $t
-     /tmp/ccQIG65a.s:222    .text.SystemClock_Config:00000000 SystemClock_Config
-     /tmp/ccQIG65a.s:309    .text.main:00000000 $t
-     /tmp/ccQIG65a.s:315    .text.main:00000000 main
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:19     .text.MX_GPIO_Init:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:24     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:114    .text.MX_GPIO_Init:0000005c $d
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:120    .text.calculate_mandelbrot_fixed_point_arithmetic:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:126    .text.calculate_mandelbrot_fixed_point_arithmetic:00000000 calculate_mandelbrot_fixed_point_arithmetic
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:149    .text.calculate_mandelbrot_double:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:155    .text.calculate_mandelbrot_double:00000000 calculate_mandelbrot_double
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:178    .text.Error_Handler:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:184    .text.Error_Handler:00000000 Error_Handler
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:216    .text.SystemClock_Config:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:222    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:309    .text.main:00000000 $t
+C:\Users\basua\AppData\Local\Temp\ccg9US1r.s:315    .text.main:00000000 main
 
 UNDEFINED SYMBOLS
 memset
