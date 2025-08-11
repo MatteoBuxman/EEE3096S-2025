@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,6 +52,12 @@ static uint8_t led_step = 0;              // Current step in pattern
 static uint16_t timer_period = 1000;    // Timer period in ms (default 1 second)
 static uint8_t button_state[4] = { 1, 1, 1, 1 }; // Previous button states for debouncing
 static uint8_t button_pressed[4] = { 0, 0, 0, 0 }; // Button press flags
+static uint8_t  sparkle_state = 0;          // 0=setup, 1=hold, 2=turn-off
+static uint8_t  sparkle_leds[8];            // LED states
+static uint8_t  sparkle_active_count = 0;   // How many LEDs are ON
+static uint16_t sparkle_hold_timer = 0;     // Timer for hold phase (in milliseconds)
+static uint16_t sparkle_hold_duration = 0;  // How long to hold before turning off (in milliseconds)
+static uint32_t seed = 12345;
 
 //
 #define LEDS_MASK (LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin| \
@@ -333,7 +340,10 @@ void TIM16_IRQHandler(void) {
 	update_led_pattern();
 
 }
-
+static inline uint32_t rand_lcg(uint32_t *seed) {
+    *seed = (*seed * 1103515245u) + 12345u;
+    return *seed;
+}
 void set_pin(int pin_number) {
 	switch (pin_number) {
 	case 0:
@@ -434,15 +444,93 @@ void update_led_pattern(void) {
 	}
 
 	case 3: // TODO: Fill in the random pattern.
-		LL_GPIO_SetOutputPin(GPIOB, LED0_Pin | LED1_Pin | LED2_Pin);
-		break;
+		switch (sparkle_state)
+		        		    {
+		        		        case 0: // Setup phase - randomly light LEDs
+		        		        {
+		        		            memset(sparkle_leds, 0, sizeof(sparkle_leds));
+		        		            sparkle_active_count = 0;
 
-	default: // Default to Mode 1 if invalid pattern
-		led_pattern = 1;
-		led_step = 0;
-		break;
+		        		            // Randomly turn LEDs on (60% chance each)
+		        		            for (int i = 0; i < 8; i++) {
+		        		                if ((rand_lcg(&seed) % 100) < 60) {
+		        		                    sparkle_leds[i] = 1;
+		        		                    sparkle_active_count++;
+		        		                }
+		        		            }
+
+		        		            // Ensure at least one LED is on
+		        		            if (sparkle_active_count == 0) {
+		        		                int led_idx = rand_lcg(&seed) % 8;
+		        		                sparkle_leds[led_idx] = 1;
+		        		                sparkle_active_count = 1;
+		        		            }
+
+		        		            // Random hold duration (100-1500ms)
+		        		            sparkle_hold_duration = (rand_lcg(&seed) % 1401) + 100;
+		        		            sparkle_hold_timer = 0;
+
+		        		            sparkle_state = 1; // Go to hold phase
+		        		            break;
+		        		        }
+
+		        		        case 1: // Hold phase - maintain pattern for specified milliseconds
+		        		        {
+		        		            sparkle_hold_timer += timer_period; // Accumulate actual timer period
+		        		            if (sparkle_hold_timer >= sparkle_hold_duration) {
+		        		                sparkle_state = 2; // Go to turn-off phase
+		        		            }
+		        		            break;
+		        		        }
+
+		        		        case 2: // Turn-off phase - turn off one LED at random
+		        		        {
+		        		            if (sparkle_active_count > 0) {
+		        		                int idx;
+		        		                // Pick a random LED that is currently ON
+		        		                do {
+		        		                    idx = rand_lcg(&seed) % 8;
+		        		                } while (!sparkle_leds[idx] && sparkle_active_count > 0);
+
+		        		                if (sparkle_leds[idx]) {
+		        		                    sparkle_leds[idx] = 0;
+		        		                    sparkle_active_count--;
+		        		                }
+		        		            } else {
+		        		                // All LEDs are off, restart the cycle
+		        		                sparkle_state = 0;
+		        		            }
+		        		            break;
+		        		        }
+		        		    }
+
+		        		    // Update the actual LED hardware based on sparkle_leds array
+		        		    GPIO_TypeDef* ports[] = {
+		        		        LED0_GPIO_Port, LED1_GPIO_Port, LED2_GPIO_Port, LED3_GPIO_Port,
+		        		        LED4_GPIO_Port, LED5_GPIO_Port, LED6_GPIO_Port, LED7_GPIO_Port
+		        		    };
+		        		    uint32_t pins[] = {
+		        		        LED0_Pin, LED1_Pin, LED2_Pin, LED3_Pin,
+		        		        LED4_Pin, LED5_Pin, LED6_Pin, LED7_Pin
+		        		    };
+
+		        		    for (int i = 0; i < 8; i++) {
+		        		        if (sparkle_leds[i])
+		        		            LL_GPIO_SetOutputPin(ports[i], pins[i]);
+		        		        else
+		        		            LL_GPIO_ResetOutputPin(ports[i], pins[i]);
+		        		    }
+		        		    break;
+
+
+
+		        default: // Default to Mode 1 if invalid pattern
+		            led_pattern = 1;
+		            led_step = 0;
+		            break;
 	}
 }
+
 void check_buttons(void) {
 	uint8_t current_state[4];
 
@@ -459,19 +547,14 @@ void check_buttons(void) {
 
 			switch (i) {
 			case 0: // Button 0: Change delay speed (cycle through different speeds)
-				if (timer_period == 250)         // Very fast
-					timer_period = 500;         // Fast
-				else if (timer_period == 500)
-					timer_period = 1000;        // Normal
-				else if (timer_period == 1000)
-					timer_period = 1500;        // Slow
-				else if (timer_period == 1500)
-					timer_period = 2000;        // Very slow
-				else
-					timer_period = 250;         // Back to very fast
+				if(timer_period == 1000)         // Currently 1 second
+				                	    timer_period = 500;          // Switch to 0.5 second
+				                	else
+				                	    timer_period = 1000;         // Switch back to 1 second
 
-				set_timer_period(timer_period);
-				break;
+				                	set_timer_period(timer_period);
+				                	break;
+
 
 			case 1: // Button 1: Set LED pattern mode 1
 				led_pattern = 1;

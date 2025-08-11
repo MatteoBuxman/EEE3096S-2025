@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cckwAHTg.s 			page 1
+ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cckwAHTg.s 			page 1
   30:Core/Src/stm32f0xx_hal_msp.c **** /* USER CODE END TD */
   31:Core/Src/stm32f0xx_hal_msp.c **** 
   32:Core/Src/stm32f0xx_hal_msp.c **** /* Private define ------------------------------------------------------------*/
-ARM GAS  /tmp/cckwAHTg.s 			page 2
+ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 2
 
 
   33:Core/Src/stm32f0xx_hal_msp.c **** /* USER CODE BEGIN Define */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cckwAHTg.s 			page 1
   44              		.loc 1 69 3 view .LVU4
   45 000c 9969     		ldr	r1, [r3, #24]
   46 000e 0A40     		ands	r2, r1
-ARM GAS  /tmp/cckwAHTg.s 			page 3
+ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 3
 
 
   47 0010 0092     		str	r2, [sp]
@@ -163,16 +163,16 @@ ARM GAS  /tmp/cckwAHTg.s 			page 1
   78              	.LFE40:
   80              		.text
   81              	.Letext0:
-  82              		.file 2 "/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
-  83              		.file 3 "/opt/st/stm32cubeide_1.19.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-
+  82              		.file 2 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+  83              		.file 3 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
   84              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h"
-ARM GAS  /tmp/cckwAHTg.s 			page 4
+ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f0xx_hal_msp.c
-     /tmp/cckwAHTg.s:19     .text.HAL_MspInit:00000000 $t
-     /tmp/cckwAHTg.s:25     .text.HAL_MspInit:00000000 HAL_MspInit
-     /tmp/cckwAHTg.s:76     .text.HAL_MspInit:0000002c $d
+C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:19     .text.HAL_MspInit:00000000 $t
+C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:25     .text.HAL_MspInit:00000000 HAL_MspInit
+C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:76     .text.HAL_MspInit:0000002c $d
 
 NO UNDEFINED SYMBOLS
