@@ -46,7 +46,7 @@ TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 // TODO: Define input variables
-static uint8_t led_mode = 0;              // Current LED mode (0=off, 1-3=modes)
+static uint8_t led_mode = 1;              // Current LED mode (0=off, 1-3=modes)
 static uint8_t led_step = 0;              // Current step in pattern
 static uint8_t direction = 0;             // Direction for back/forth patterns (0=forward, 1=backward)
 static uint8_t button_state[4] = {1,1,1,1};
@@ -415,9 +415,6 @@ void update_led_pattern(void)
 {
     switch(led_mode)
     {
-        case 0: // All LEDs off
-            clear_all_leds();
-            break;
 
         case 1: // Mode 1: Back/forth with single LED
         {
@@ -472,7 +469,7 @@ void update_led_pattern(void)
             break;
 
         default:
-            led_mode = 0; // Default to off
+            led_mode = 1; // Default to off
             break;
     }
 }
@@ -528,7 +525,7 @@ void check_buttons(void)
                     led_mode = 3;
                     sparkle_state = 0; // Reset sparkle state
                     sparkle_start_time = HAL_GetTick();
-                    rand(HAL_GetTick());// Initialize timing
+
                     break;
             }
         }
