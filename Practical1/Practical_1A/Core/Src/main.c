@@ -52,13 +52,14 @@ static uint8_t led_step = 0;              // Current step in pattern
 static uint16_t timer_period = 1000;    // Timer period in ms (default 1 second)
 static uint8_t button_state[4] = { 1, 1, 1, 1 }; // Previous button states for debouncing
 static uint8_t button_pressed[4] = { 0, 0, 0, 0 }; // Button press flags
-static uint8_t  sparkle_state = 0;          // 0=setup, 1=hold, 2=turn-off
-static uint8_t  sparkle_leds[8];            // LED states
-static uint8_t  sparkle_active_count = 0;   // How many LEDs are ON
-static uint16_t sparkle_hold_timer = 0;     // Timer for hold phase (in milliseconds)
-static uint16_t sparkle_hold_duration = 0;  // How long to hold before turning off (in milliseconds)
-static uint32_t seed = 12345;
-
+static uint8_t sparkle_state = 0;          // 0=setup,1=hold,2=turn off LEDs sequentially
+	    static uint8_t sparkle_leds[8] = {0};      // LED ON/OFF states
+	    static uint8_t sparkle_active_count = 0;   // Number of LEDs ON
+	    static uint32_t sparkle_hold_timer = 0;    // Timer for hold phase
+	    static uint32_t sparkle_hold_duration = 0; // Hold duration (100-1500 ms)
+	    static uint8_t current_turnoff_led = 0;    // Index of LED currently turning off
+	    static uint32_t turnoff_timer = 0;         // Timer for delay between LED turn-offs
+	    static uint32_t turnoff_delay = 0;
 //
 #define LEDS_MASK (LED0_Pin|LED1_Pin|LED2_Pin|LED3_Pin| \
                    LED4_Pin|LED5_Pin|LED6_Pin|LED7_Pin)
@@ -443,84 +444,95 @@ void update_led_pattern(void) {
 
 	}
 
-	case 3: // TODO: Fill in the random pattern.
-		switch (sparkle_state)
-		        		    {
-		        		        case 0: // Setup phase - randomly light LEDs
-		        		        {
-		        		            memset(sparkle_leds, 0, sizeof(sparkle_leds));
-		        		            sparkle_active_count = 0;
 
-		        		            // Randomly turn LEDs on (60% chance each)
-		        		            for (int i = 0; i < 8; i++) {
-		        		                if ((rand_lcg(&seed) % 100) < 60) {
-		        		                    sparkle_leds[i] = 1;
-		        		                    sparkle_active_count++;
-		        		                }
-		        		            }
+	case 3: // Mode 3: Random sparkle pattern
+	{
+	           // Random delay between LED turn-offs (0-100ms)
 
-		        		            // Ensure at least one LED is on
-		        		            if (sparkle_active_count == 0) {
-		        		                int led_idx = rand_lcg(&seed) % 8;
-		        		                sparkle_leds[led_idx] = 1;
-		        		                sparkle_active_count = 1;
-		        		            }
+	    uint32_t now = HAL_GetTick();
 
-		        		            // Random hold duration (100-1500ms)
-		        		            sparkle_hold_duration = (rand_lcg(&seed) % 1401) + 100;
-		        		            sparkle_hold_timer = 0;
+	    switch (sparkle_state) {
+	        case 0: // Setup: Randomly turn LEDs ON
+	        {
+	            sparkle_active_count = 0;
+	            for (int i = 0; i < 8; i++) {
+	                if ((rand_lcg(&seed) % 100) < 50) {
+	                    sparkle_leds[i] = 1;
+	                    sparkle_active_count++;
+	                } else {
+	                    sparkle_leds[i] = 0;
+	                }
+	            }
+	            if (sparkle_active_count == 0) {
+	                int led_idx = rand_lcg(&seed) % 8;
+	                sparkle_leds[led_idx] = 1;
+	                sparkle_active_count = 1;
+	            }
+	            sparkle_hold_duration = (rand_lcg(&seed) % 1401) + 100; // 100-1500ms
+	            sparkle_hold_timer = now;
+	            sparkle_state = 1;
+	            break;
+	        }
+	        case 1: // Hold phase: Keep LEDs ON
+	        {
+	            if ((now - sparkle_hold_timer) >= sparkle_hold_duration) {
+	                sparkle_state = 2; // Move to turn-off phase
+	                current_turnoff_led = 0;
+	                turnoff_timer = now;
+	                turnoff_delay = rand_lcg(&seed) % 101; // 0-100 ms delay before first LED off
+	            }
+	            break;
+	        }
+	        case 2: // Turn off LEDs one by one with random delays
+	        {
+	            if (sparkle_active_count == 0) {
+	                // All LEDs off, restart cycle
+	                sparkle_state = 0;
+	                break;
+	            }
 
-		        		            sparkle_state = 1; // Go to hold phase
-		        		            break;
-		        		        }
+	            if ((now - turnoff_timer) >= turnoff_delay) {
+	                // Find next LED ON to turn off
+	                while (current_turnoff_led < 8 && sparkle_leds[current_turnoff_led] == 0) {
+	                    current_turnoff_led++;
+	                }
 
-		        		        case 1: // Hold phase - maintain pattern for specified milliseconds
-		        		        {
-		        		            sparkle_hold_timer += timer_period; // Accumulate actual timer period
-		        		            if (sparkle_hold_timer >= sparkle_hold_duration) {
-		        		                sparkle_state = 2; // Go to turn-off phase
-		        		            }
-		        		            break;
-		        		        }
+	                if (current_turnoff_led < 8) {
+	                    // Turn off this LED
+	                    sparkle_leds[current_turnoff_led] = 0;
+	                    sparkle_active_count--;
+	                    current_turnoff_led++;
 
-		        		        case 2: // Turn-off phase - turn off one LED at random
-		        		        {
-		        		            if (sparkle_active_count > 0) {
-		        		                int idx;
-		        		                // Pick a random LED that is currently ON
-		        		                do {
-		        		                    idx = rand_lcg(&seed) % 8;
-		        		                } while (!sparkle_leds[idx] && sparkle_active_count > 0);
+	                    // Reset turnoff timer and pick new random delay (0-100ms)
+	                    turnoff_timer = now;
+	                    turnoff_delay = rand_lcg(&seed) % 101;
+	                } else {
+	                    // No more LEDs to turn off, restart cycle
+	                    sparkle_state = 0;
+	                }
+	            }
+	            break;
+	        }
+	    }
 
-		        		                if (sparkle_leds[idx]) {
-		        		                    sparkle_leds[idx] = 0;
-		        		                    sparkle_active_count--;
-		        		                }
-		        		            } else {
-		        		                // All LEDs are off, restart the cycle
-		        		                sparkle_state = 0;
-		        		            }
-		        		            break;
-		        		        }
-		        		    }
+	    // Update actual LEDs hardware pins
+	    GPIO_TypeDef* ports[] = {
+	        LED0_GPIO_Port, LED1_GPIO_Port, LED2_GPIO_Port, LED3_GPIO_Port,
+	        LED4_GPIO_Port, LED5_GPIO_Port, LED6_GPIO_Port, LED7_GPIO_Port
+	    };
+	    uint32_t pins[] = {
+	        LED0_Pin, LED1_Pin, LED2_Pin, LED3_Pin,
+	        LED4_Pin, LED5_Pin, LED6_Pin, LED7_Pin
+	    };
 
-		        		    // Update the actual LED hardware based on sparkle_leds array
-		        		    GPIO_TypeDef* ports[] = {
-		        		        LED0_GPIO_Port, LED1_GPIO_Port, LED2_GPIO_Port, LED3_GPIO_Port,
-		        		        LED4_GPIO_Port, LED5_GPIO_Port, LED6_GPIO_Port, LED7_GPIO_Port
-		        		    };
-		        		    uint32_t pins[] = {
-		        		        LED0_Pin, LED1_Pin, LED2_Pin, LED3_Pin,
-		        		        LED4_Pin, LED5_Pin, LED6_Pin, LED7_Pin
-		        		    };
-
-		        		    for (int i = 0; i < 8; i++) {
-		        		        if (sparkle_leds[i])
-		        		            LL_GPIO_SetOutputPin(ports[i], pins[i]);
-		        		        else
-		        		            LL_GPIO_ResetOutputPin(ports[i], pins[i]);
-		        		    }
-		        		    break;
+	    for (int i = 0; i < 8; i++) {
+	        if (sparkle_leds[i])
+	            LL_GPIO_SetOutputPin(ports[i], pins[i]);
+	        else
+	            LL_GPIO_ResetOutputPin(ports[i], pins[i]);
+	    }
+	    break;
+	}
 
 
 
