@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s 			page 1
 
 
    1              		.cpu cortex-m0
@@ -25,7 +25,7 @@ ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
   22              		.code	16
   23              		.thumb_func
   25              	HAL_MspInit:
-  26              	.LFB40:
+  26              	.LFB343:
    1:Core/Src/stm32f0xx_hal_msp.c **** /* USER CODE BEGIN Header */
    2:Core/Src/stm32f0xx_hal_msp.c **** /**
    3:Core/Src/stm32f0xx_hal_msp.c ****   ******************************************************************************
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
   30:Core/Src/stm32f0xx_hal_msp.c **** /* USER CODE END TD */
   31:Core/Src/stm32f0xx_hal_msp.c **** 
   32:Core/Src/stm32f0xx_hal_msp.c **** /* Private define ------------------------------------------------------------*/
-ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 2
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s 			page 2
 
 
   33:Core/Src/stm32f0xx_hal_msp.c **** /* USER CODE BEGIN Define */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
   44              		.loc 1 69 3 view .LVU4
   45 000c 9969     		ldr	r1, [r3, #24]
   46 000e 0A40     		ands	r2, r1
-ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 3
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s 			page 3
 
 
   47 0010 0092     		str	r2, [sp]
@@ -160,19 +160,20 @@ ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 1
   75              	.L2:
   76 002c 00100240 		.word	1073876992
   77              		.cfi_endproc
-  78              	.LFE40:
+  78              	.LFE343:
   80              		.text
   81              	.Letext0:
-  82              		.file 2 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
-  83              		.file 3 "C:\\ST\\STM32CubeIDE_1.19.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltool
+  82              		.file 2 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+  83              		.file 3 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
   84              		.file 4 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f051x8.h"
-ARM GAS  C:\Users\basua\AppData\Local\Temp\cckBdhhI.s 			page 4
+  85              		.file 5 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_ll_dma.h"
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f0xx_hal_msp.c
-C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:19     .text.HAL_MspInit:00000000 $t
-C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:25     .text.HAL_MspInit:00000000 HAL_MspInit
-C:\Users\basua\AppData\Local\Temp\cckBdhhI.s:76     .text.HAL_MspInit:0000002c $d
+/var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s:19     .text.HAL_MspInit:00000000 $t
+/var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s:25     .text.HAL_MspInit:00000000 HAL_MspInit
+/var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccXu5Sac.s:76     .text.HAL_MspInit:0000002c $d
 
 NO UNDEFINED SYMBOLS
