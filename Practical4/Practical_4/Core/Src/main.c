@@ -129,12 +129,35 @@ int main(void)
   // TODO: Enable DMA (start transfer from LUT to CCR)
 
   /* USER CODE END 2 */
+  init_LCD();
+
+  char* str[] = {
+		  "KING BUXMAN",
+		  "FUCK YOU!",
+		  "I'M WORKING HERE!"
+  };
+
+  int i = 0;
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
+	 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+
+	 //Clear screen first
+	 lcd_command(0x01);
+
+	 lcd_putstring(str[i % 3]);
+
+	 delay(1000000);
+
+	 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+
+	 delay(1000000);
+
+	 i++;
 
     /* USER CODE BEGIN 3 */
   }
@@ -387,6 +410,13 @@ static void MX_GPIO_Init(void)
   // Enable and set EXTI line 0 interrupt priority
   HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+
+  GPIO_InitStruct.Pin = GPIO_PIN_4;                // which pin(s)
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;      // output, push-pull
+  GPIO_InitStruct.Pull = GPIO_NOPULL;              // no pull-up or pull-down
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;     // low speed is fine for LED
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);          // apply to GPIOB
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
