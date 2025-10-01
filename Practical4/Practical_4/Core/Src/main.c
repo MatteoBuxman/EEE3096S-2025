@@ -22,8 +22,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <stdint.h>
 #include "stm32f4xx.h"
 #include "lcd_stm32f4.h"
+#include "waveform.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,7 +36,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 // TODO: Add values for below variables
-#define NS        // Number of samples in LUT
+//#define NS        // Number of samples in LUT
 #define TIM2CLK   // STM Clock frequency: Hint You might want to check the ioc file
 #define F_SIGNAL  	// Frequency of output analog signal
 
@@ -52,9 +54,6 @@ DMA_HandleTypeDef hdma_tim2_ch1;
 
 /* USER CODE BEGIN PV */
 // TODO: Add code for global variables, including LUTs
-uint32_t Sin_LUT[NS] = {};
-uint32_t Saw_LUT[NS] = {};
-uint32_t Triangle_LUT[NS] = {};
 uint32_t Piano_LUT = {};
 uint32_t Guitar_LUT = {};
 uint32_t Drum_LUT = {};
@@ -129,39 +128,17 @@ int main(void)
   // TODO: Enable DMA (start transfer from LUT to CCR)
 
   /* USER CODE END 2 */
+
+
+
+  char* first = "If lost, return";
+  char* second = "to GOAT Matteo.";
+
   init_LCD();
+  lcd_putstring(first);
+  lcd_command(LINE_TWO);
+  lcd_putstring(second);
 
-  char* str[] = {
-		  "KING BUXMAN",
-		  "FUCK YOU!",
-		  "I'M WORKING HERE!"
-  };
-
-  int i = 0;
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
-
-	 //Clear screen first
-	 lcd_command(0x01);
-
-	 lcd_putstring(str[i % 3]);
-
-	 delay(1000000);
-
-	 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
-
-	 delay(1000000);
-
-	 i++;
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -412,7 +389,7 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
 
-  GPIO_InitStruct.Pin = GPIO_PIN_4;                // which pin(s)
+  GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;                // which pin(s)
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;      // output, push-pull
   GPIO_InitStruct.Pull = GPIO_NOPULL;              // no pull-up or pull-down
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;     // low speed is fine for LED

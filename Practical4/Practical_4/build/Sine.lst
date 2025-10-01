@@ -1,0 +1,308 @@
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"Sine.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Luts/Sine.c"
+  20              		.global	Sine_LUT
+  21              		.section	.rodata.Sine_LUT,"a"
+  22              		.align	2
+  25              	Sine_LUT:
+  26 0000 0008     		.short	2048
+  27 0002 3208     		.short	2098
+  28 0004 6408     		.short	2148
+  29 0006 9608     		.short	2198
+  30 0008 C808     		.short	2248
+  31 000a FA08     		.short	2298
+  32 000c 2C09     		.short	2348
+  33 000e 5E09     		.short	2398
+  34 0010 8F09     		.short	2447
+  35 0012 C009     		.short	2496
+  36 0014 F109     		.short	2545
+  37 0016 220A     		.short	2594
+  38 0018 520A     		.short	2642
+  39 001a 820A     		.short	2690
+  40 001c B10A     		.short	2737
+  41 001e E00A     		.short	2784
+  42 0020 0F0B     		.short	2831
+  43 0022 3D0B     		.short	2877
+  44 0024 6B0B     		.short	2923
+  45 0026 980B     		.short	2968
+  46 0028 C50B     		.short	3013
+  47 002a F10B     		.short	3057
+  48 002c 1C0C     		.short	3100
+  49 002e 470C     		.short	3143
+  50 0030 710C     		.short	3185
+  51 0032 9A0C     		.short	3226
+  52 0034 C30C     		.short	3267
+  53 0036 EB0C     		.short	3307
+  54 0038 120D     		.short	3346
+  55 003a 390D     		.short	3385
+  56 003c 5F0D     		.short	3423
+  57 003e 830D     		.short	3459
+  58 0040 A70D     		.short	3495
+  59 0042 CA0D     		.short	3530
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 2
+
+
+  60 0044 ED0D     		.short	3565
+  61 0046 0E0E     		.short	3598
+  62 0048 2E0E     		.short	3630
+  63 004a 4E0E     		.short	3662
+  64 004c 6C0E     		.short	3692
+  65 004e 8A0E     		.short	3722
+  66 0050 A60E     		.short	3750
+  67 0052 C10E     		.short	3777
+  68 0054 DC0E     		.short	3804
+  69 0056 F50E     		.short	3829
+  70 0058 0D0F     		.short	3853
+  71 005a 240F     		.short	3876
+  72 005c 3A0F     		.short	3898
+  73 005e 4F0F     		.short	3919
+  74 0060 630F     		.short	3939
+  75 0062 760F     		.short	3958
+  76 0064 870F     		.short	3975
+  77 0066 980F     		.short	3992
+  78 0068 A70F     		.short	4007
+  79 006a B50F     		.short	4021
+  80 006c C20F     		.short	4034
+  81 006e CD0F     		.short	4045
+  82 0070 D80F     		.short	4056
+  83 0072 E10F     		.short	4065
+  84 0074 E90F     		.short	4073
+  85 0076 F00F     		.short	4080
+  86 0078 F50F     		.short	4085
+  87 007a F90F     		.short	4089
+  88 007c FD0F     		.short	4093
+  89 007e FE0F     		.short	4094
+  90 0080 FF0F     		.short	4095
+  91 0082 FE0F     		.short	4094
+  92 0084 FD0F     		.short	4093
+  93 0086 F90F     		.short	4089
+  94 0088 F50F     		.short	4085
+  95 008a F00F     		.short	4080
+  96 008c E90F     		.short	4073
+  97 008e E10F     		.short	4065
+  98 0090 D80F     		.short	4056
+  99 0092 CD0F     		.short	4045
+ 100 0094 C20F     		.short	4034
+ 101 0096 B50F     		.short	4021
+ 102 0098 A70F     		.short	4007
+ 103 009a 980F     		.short	3992
+ 104 009c 870F     		.short	3975
+ 105 009e 760F     		.short	3958
+ 106 00a0 630F     		.short	3939
+ 107 00a2 4F0F     		.short	3919
+ 108 00a4 3A0F     		.short	3898
+ 109 00a6 240F     		.short	3876
+ 110 00a8 0D0F     		.short	3853
+ 111 00aa F50E     		.short	3829
+ 112 00ac DC0E     		.short	3804
+ 113 00ae C10E     		.short	3777
+ 114 00b0 A60E     		.short	3750
+ 115 00b2 8A0E     		.short	3722
+ 116 00b4 6C0E     		.short	3692
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 3
+
+
+ 117 00b6 4E0E     		.short	3662
+ 118 00b8 2E0E     		.short	3630
+ 119 00ba 0E0E     		.short	3598
+ 120 00bc ED0D     		.short	3565
+ 121 00be CA0D     		.short	3530
+ 122 00c0 A70D     		.short	3495
+ 123 00c2 830D     		.short	3459
+ 124 00c4 5F0D     		.short	3423
+ 125 00c6 390D     		.short	3385
+ 126 00c8 120D     		.short	3346
+ 127 00ca EB0C     		.short	3307
+ 128 00cc C30C     		.short	3267
+ 129 00ce 9A0C     		.short	3226
+ 130 00d0 710C     		.short	3185
+ 131 00d2 470C     		.short	3143
+ 132 00d4 1C0C     		.short	3100
+ 133 00d6 F10B     		.short	3057
+ 134 00d8 C50B     		.short	3013
+ 135 00da 980B     		.short	2968
+ 136 00dc 6B0B     		.short	2923
+ 137 00de 3D0B     		.short	2877
+ 138 00e0 0F0B     		.short	2831
+ 139 00e2 E00A     		.short	2784
+ 140 00e4 B10A     		.short	2737
+ 141 00e6 820A     		.short	2690
+ 142 00e8 520A     		.short	2642
+ 143 00ea 220A     		.short	2594
+ 144 00ec F109     		.short	2545
+ 145 00ee C009     		.short	2496
+ 146 00f0 8F09     		.short	2447
+ 147 00f2 5E09     		.short	2398
+ 148 00f4 2C09     		.short	2348
+ 149 00f6 FA08     		.short	2298
+ 150 00f8 C808     		.short	2248
+ 151 00fa 9608     		.short	2198
+ 152 00fc 6408     		.short	2148
+ 153 00fe 3208     		.short	2098
+ 154 0100 0008     		.short	2048
+ 155 0102 CD07     		.short	1997
+ 156 0104 9B07     		.short	1947
+ 157 0106 6907     		.short	1897
+ 158 0108 3707     		.short	1847
+ 159 010a 0507     		.short	1797
+ 160 010c D306     		.short	1747
+ 161 010e A106     		.short	1697
+ 162 0110 7006     		.short	1648
+ 163 0112 3F06     		.short	1599
+ 164 0114 0E06     		.short	1550
+ 165 0116 DD05     		.short	1501
+ 166 0118 AD05     		.short	1453
+ 167 011a 7D05     		.short	1405
+ 168 011c 4E05     		.short	1358
+ 169 011e 1F05     		.short	1311
+ 170 0120 F004     		.short	1264
+ 171 0122 C204     		.short	1218
+ 172 0124 9404     		.short	1172
+ 173 0126 6704     		.short	1127
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 4
+
+
+ 174 0128 3A04     		.short	1082
+ 175 012a 0E04     		.short	1038
+ 176 012c E303     		.short	995
+ 177 012e B803     		.short	952
+ 178 0130 8E03     		.short	910
+ 179 0132 6503     		.short	869
+ 180 0134 3C03     		.short	828
+ 181 0136 1403     		.short	788
+ 182 0138 ED02     		.short	749
+ 183 013a C602     		.short	710
+ 184 013c A002     		.short	672
+ 185 013e 7C02     		.short	636
+ 186 0140 5802     		.short	600
+ 187 0142 3502     		.short	565
+ 188 0144 1202     		.short	530
+ 189 0146 F101     		.short	497
+ 190 0148 D101     		.short	465
+ 191 014a B101     		.short	433
+ 192 014c 9301     		.short	403
+ 193 014e 7501     		.short	373
+ 194 0150 5901     		.short	345
+ 195 0152 3E01     		.short	318
+ 196 0154 2301     		.short	291
+ 197 0156 0A01     		.short	266
+ 198 0158 F200     		.short	242
+ 199 015a DB00     		.short	219
+ 200 015c C500     		.short	197
+ 201 015e B000     		.short	176
+ 202 0160 9C00     		.short	156
+ 203 0162 8900     		.short	137
+ 204 0164 7800     		.short	120
+ 205 0166 6700     		.short	103
+ 206 0168 5800     		.short	88
+ 207 016a 4A00     		.short	74
+ 208 016c 3D00     		.short	61
+ 209 016e 3200     		.short	50
+ 210 0170 2700     		.short	39
+ 211 0172 1E00     		.short	30
+ 212 0174 1600     		.short	22
+ 213 0176 0F00     		.short	15
+ 214 0178 0A00     		.short	10
+ 215 017a 0600     		.short	6
+ 216 017c 0200     		.short	2
+ 217 017e 0100     		.short	1
+ 218 0180 0000     		.short	0
+ 219 0182 0100     		.short	1
+ 220 0184 0200     		.short	2
+ 221 0186 0600     		.short	6
+ 222 0188 0A00     		.short	10
+ 223 018a 0F00     		.short	15
+ 224 018c 1600     		.short	22
+ 225 018e 1E00     		.short	30
+ 226 0190 2700     		.short	39
+ 227 0192 3200     		.short	50
+ 228 0194 3D00     		.short	61
+ 229 0196 4A00     		.short	74
+ 230 0198 5800     		.short	88
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 5
+
+
+ 231 019a 6700     		.short	103
+ 232 019c 7800     		.short	120
+ 233 019e 8900     		.short	137
+ 234 01a0 9C00     		.short	156
+ 235 01a2 B000     		.short	176
+ 236 01a4 C500     		.short	197
+ 237 01a6 DB00     		.short	219
+ 238 01a8 F200     		.short	242
+ 239 01aa 0A01     		.short	266
+ 240 01ac 2301     		.short	291
+ 241 01ae 3E01     		.short	318
+ 242 01b0 5901     		.short	345
+ 243 01b2 7501     		.short	373
+ 244 01b4 9301     		.short	403
+ 245 01b6 B101     		.short	433
+ 246 01b8 D101     		.short	465
+ 247 01ba F101     		.short	497
+ 248 01bc 1202     		.short	530
+ 249 01be 3502     		.short	565
+ 250 01c0 5802     		.short	600
+ 251 01c2 7C02     		.short	636
+ 252 01c4 A002     		.short	672
+ 253 01c6 C602     		.short	710
+ 254 01c8 ED02     		.short	749
+ 255 01ca 1403     		.short	788
+ 256 01cc 3C03     		.short	828
+ 257 01ce 6503     		.short	869
+ 258 01d0 8E03     		.short	910
+ 259 01d2 B803     		.short	952
+ 260 01d4 E303     		.short	995
+ 261 01d6 0E04     		.short	1038
+ 262 01d8 3A04     		.short	1082
+ 263 01da 6704     		.short	1127
+ 264 01dc 9404     		.short	1172
+ 265 01de C204     		.short	1218
+ 266 01e0 F004     		.short	1264
+ 267 01e2 1F05     		.short	1311
+ 268 01e4 4E05     		.short	1358
+ 269 01e6 7D05     		.short	1405
+ 270 01e8 AD05     		.short	1453
+ 271 01ea DD05     		.short	1501
+ 272 01ec 0E06     		.short	1550
+ 273 01ee 3F06     		.short	1599
+ 274 01f0 7006     		.short	1648
+ 275 01f2 A106     		.short	1697
+ 276 01f4 D306     		.short	1747
+ 277 01f6 0507     		.short	1797
+ 278 01f8 3707     		.short	1847
+ 279 01fa 6907     		.short	1897
+ 280 01fc 9B07     		.short	1947
+ 281 01fe CD07     		.short	1997
+ 282              		.text
+ 283              	.Letext0:
+ 284              		.file 2 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ 285              		.file 3 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ 286              		.file 4 "Luts/waveform.h"
+ARM GAS  /var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 Sine.c
+/var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s:25     .rodata.Sine_LUT:00000000 Sine_LUT
+/var/folders/x0/qrp3r5317y18246dwl6ly7b40000gn/T//ccRGZLry.s:22     .rodata.Sine_LUT:00000000 $d
+
+NO UNDEFINED SYMBOLS
