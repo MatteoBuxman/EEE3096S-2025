@@ -25,7 +25,27 @@
 #include <stdint.h>
 #include "stm32f4xx.h"
 #include "lcd_stm32f4.h"
-#include "waveform.h"
+
+//INCLUDE LUTS
+
+//Following three have 75000 samples from their respective .wav audio file.
+//So when playing back the samples, to effectively reproduce the original file the play back frequency should be (selected samples)/(total file samples) * sampling_freq
+
+
+//Drum.wav Duration       : 00:00:11.34 = 499968 samples
+#include "drum.inc"
+
+//Guitar.wav Duration       : 00:00:10.58 = 466560 samples = 793.469 CDDA sector
+#include "guitar.inc"
+
+//Piano.wav Duration       : 00:00:18.86 = 831744 samples = 1414.53 CDDA sectors
+#include "piano.inc"
+
+//Following three have 256 samples
+#include "saw.inc"
+#include "sine.inc"
+#include "triangle.inc"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,7 +56,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 // TODO: Add values for below variables
-//#define NS        // Number of samples in LUT
+#define NS        // Number of samples in LUT
 #define TIM2CLK   // STM Clock frequency: Hint You might want to check the ioc file
 #define F_SIGNAL  	// Frequency of output analog signal
 
@@ -82,6 +102,10 @@ void EXTI0_IRQHandler(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+//The play back frequency of the chosen audio track
+uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size);
+
+
 /* USER CODE END 0 */
 
 /**
@@ -118,8 +142,12 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   // TODO: Start TIM3 in PWM mode on channel 3
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+
+
 
   // TODO: Start TIM2 in Output Compare (OC) mode on channel 1
+  HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_1);
 
   // TODO: Start DMA in IT mode on TIM2->CH1. Source is LUT and Dest is TIM3->CCR3; start with Sine LUT
 
@@ -129,16 +157,18 @@ int main(void)
 
   /* USER CODE END 2 */
 
+  return 0;
+
+}
 
 
-  char* first = "If lost, return";
-  char* second = "to GOAT Matteo.";
+uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size){
 
-  init_LCD();
-  lcd_putstring(first);
-  lcd_command(LINE_TWO);
-  lcd_putstring(second);
+	if(selected_sample_size > original_file_size) return 0;
 
+	static const uint16_t sampling_freq = 44100;
+
+	return ((float)selected_sample_size / (float)original_file_size) * sampling_freq;
 }
 
 /**
@@ -305,7 +335,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
+  sConfigOC.Pulse = 50000;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -388,12 +418,6 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
-
-  GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;                // which pin(s)
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;      // output, push-pull
-  GPIO_InitStruct.Pull = GPIO_NOPULL;              // no pull-up or pull-down
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;     // low speed is fine for LED
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);          // apply to GPIOB
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
