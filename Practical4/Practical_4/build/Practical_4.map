@@ -1705,20 +1705,20 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .comment       0x00000043       0x44 build/stm32f4xx_hal.o
  .comment       0x00000043       0x44 build/system_stm32f4xx.o
 
-.debug_info     0x00000000     0xdc7a
- .debug_info    0x00000000     0x19d3 build/main.o
- .debug_info    0x000019d3      0x47b build/stm32f4xx_it.o
- .debug_info    0x00001e4e      0xc9d build/stm32f4xx_hal_msp.o
- .debug_info    0x00002aeb     0x41a0 build/stm32f4xx_hal_tim.o
- .debug_info    0x00006c8b     0x1da5 build/stm32f4xx_hal_tim_ex.o
- .debug_info    0x00008a30      0xc73 build/stm32f4xx_hal_rcc.o
- .debug_info    0x000096a3      0xddc build/stm32f4xx_hal_rcc_ex.o
- .debug_info    0x0000a47f      0x8ac build/stm32f4xx_hal_gpio.o
- .debug_info    0x0000ad2b      0xbce build/stm32f4xx_hal_dma.o
- .debug_info    0x0000b8f9     0x11fe build/stm32f4xx_hal_cortex.o
- .debug_info    0x0000caf7      0xb5c build/stm32f4xx_hal.o
- .debug_info    0x0000d653      0x5f7 build/system_stm32f4xx.o
- .debug_info    0x0000dc4a       0x30 build/startup_stm32f446xx.o
+.debug_info     0x00000000     0xdc5d
+ .debug_info    0x00000000     0x19b6 build/main.o
+ .debug_info    0x000019b6      0x47b build/stm32f4xx_it.o
+ .debug_info    0x00001e31      0xc9d build/stm32f4xx_hal_msp.o
+ .debug_info    0x00002ace     0x41a0 build/stm32f4xx_hal_tim.o
+ .debug_info    0x00006c6e     0x1da5 build/stm32f4xx_hal_tim_ex.o
+ .debug_info    0x00008a13      0xc73 build/stm32f4xx_hal_rcc.o
+ .debug_info    0x00009686      0xddc build/stm32f4xx_hal_rcc_ex.o
+ .debug_info    0x0000a462      0x8ac build/stm32f4xx_hal_gpio.o
+ .debug_info    0x0000ad0e      0xbce build/stm32f4xx_hal_dma.o
+ .debug_info    0x0000b8dc     0x11fe build/stm32f4xx_hal_cortex.o
+ .debug_info    0x0000cada      0xb5c build/stm32f4xx_hal.o
+ .debug_info    0x0000d636      0x5f7 build/system_stm32f4xx.o
+ .debug_info    0x0000dc2d       0x30 build/startup_stm32f446xx.o
 
 .debug_abbrev   0x00000000     0x1dd0
  .debug_abbrev  0x00000000      0x336 build/main.o
@@ -1807,21 +1807,21 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_line    0x0000bafc      0x328 build/system_stm32f4xx.o
  .debug_line    0x0000be24       0x73 build/startup_stm32f446xx.o
 
-.debug_str      0x00000000     0x37f0
- .debug_str     0x00000000     0x37f0 build/main.o
-                               0x132c (size before relaxing)
- .debug_str     0x000037f0      0x4d4 build/stm32f4xx_it.o
- .debug_str     0x000037f0      0x968 build/stm32f4xx_hal_msp.o
- .debug_str     0x000037f0     0x170b build/stm32f4xx_hal_tim.o
- .debug_str     0x000037f0      0xf17 build/stm32f4xx_hal_tim_ex.o
- .debug_str     0x000037f0      0x73c build/stm32f4xx_hal_rcc.o
- .debug_str     0x000037f0      0x823 build/stm32f4xx_hal_rcc_ex.o
- .debug_str     0x000037f0      0x511 build/stm32f4xx_hal_gpio.o
- .debug_str     0x000037f0      0x782 build/stm32f4xx_hal_dma.o
- .debug_str     0x000037f0      0xcc2 build/stm32f4xx_hal_cortex.o
- .debug_str     0x000037f0      0xbd6 build/stm32f4xx_hal.o
- .debug_str     0x000037f0      0x3a6 build/system_stm32f4xx.o
- .debug_str     0x000037f0       0x8e build/startup_stm32f446xx.o
+.debug_str      0x00000000     0x37e6
+ .debug_str     0x00000000     0x37e6 build/main.o
+                               0x131a (size before relaxing)
+ .debug_str     0x000037e6      0x4d4 build/stm32f4xx_it.o
+ .debug_str     0x000037e6      0x968 build/stm32f4xx_hal_msp.o
+ .debug_str     0x000037e6     0x170b build/stm32f4xx_hal_tim.o
+ .debug_str     0x000037e6      0xf17 build/stm32f4xx_hal_tim_ex.o
+ .debug_str     0x000037e6      0x73c build/stm32f4xx_hal_rcc.o
+ .debug_str     0x000037e6      0x823 build/stm32f4xx_hal_rcc_ex.o
+ .debug_str     0x000037e6      0x511 build/stm32f4xx_hal_gpio.o
+ .debug_str     0x000037e6      0x782 build/stm32f4xx_hal_dma.o
+ .debug_str     0x000037e6      0xcc2 build/stm32f4xx_hal_cortex.o
+ .debug_str     0x000037e6      0xbd6 build/stm32f4xx_hal.o
+ .debug_str     0x000037e6      0x3a6 build/system_stm32f4xx.o
+ .debug_str     0x000037e6       0x8e build/startup_stm32f446xx.o
 
 .debug_frame    0x00000000     0x1b64
  .debug_frame   0x00000000      0x108 build/main.o
