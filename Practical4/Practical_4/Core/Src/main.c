@@ -74,10 +74,10 @@ DMA_HandleTypeDef hdma_tim2_ch1;
 
 /* USER CODE BEGIN PV */
 // TODO: Add code for global variables, including LUTs
-uint32_t Piano_LUT = {};
-uint32_t Guitar_LUT = {};
-uint32_t Drum_LUT = {};
 
+//triangle, sine, saw, piano, guitar, drum
+const uint32_t NS_values[] = {256, 256, 256, 75000, 75000, 75000};
+const* waveforms[] = {"Triangle", "Sine", "Saw", "Piano", "Guitar", "Drum"};
 
 
 
