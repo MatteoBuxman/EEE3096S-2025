@@ -107,13 +107,13 @@ float F_SIGNAL[WAVEFORM_COUNT];
 
 
 
-const uint16_t NS[WAVEFORM_COUNT] = {
+const uint32_t NS[WAVEFORM_COUNT] = {
     256,
     256,
     256,
-	831744,
-	466560,
-	499968};
+	75000,
+	75000,
+	75000};
 
 uint32_t TIM2_Ticks[WAVEFORM_COUNT];
 // TODO: Equation to calculate TIM2_Ticks
@@ -137,7 +137,7 @@ void EXTI0_IRQHandler(void);
 /* USER CODE BEGIN 0 */
 
 //The play back frequency of the chosen audio track
-uint16_t calcFSignal(uint16_t selected_sample_size, uint16_t original_file_size);
+uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size);
 
 void initFSignal(void) {
     F_SIGNAL[SINE] = 1;
@@ -196,7 +196,7 @@ int main(void)
   // TODO: Start DMA in IT mode on TIM2->CH1. Source is LUT and Dest is TIM3->CCR3; start with Sine LUT
   TIM2->ARR = TIM2_Ticks[currentWave];
   HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_1);
-  HAL_DMA_Start_IT(&hdma_tim2_ch1,(uint16_t)Sine_LUT, DestAddress, NS[currentWave]);
+  HAL_DMA_Start_IT(&hdma_tim2_ch1,(uint32_t)Sine_LUT, DestAddress, NS[currentWave]);
   // TODO: Write current waveform to LCD(Sine is the first waveform)
   	init_LCD();
   	lcd_putstring(waveformNames[currentWave]);
@@ -210,7 +210,7 @@ int main(void)
 }
 
 
-uint16_t calcFSignal(uint16_t selected_sample_size, uint16_t original_file_size){
+uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size){
 
 	if(selected_sample_size > original_file_size) return 0;
 
@@ -496,22 +496,22 @@ void EXTI0_IRQHandler(void){
 	                switch(currentWave)
 	                {
 	                    case SINE:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)Sine_LUT, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Sine_LUT, DestAddress, NS[currentWave]);
 	                        break;
 	                    case SAWTOOTH:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)Saw_LUT, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Saw_LUT, DestAddress, NS[currentWave]);
 	                        break;
 	                    case TRIANGULAR:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)Triangle_LUT, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Triangle_LUT, DestAddress, NS[currentWave]);
 	                        break;
 	                    case PIANO:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)piano, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)piano, DestAddress, NS[currentWave]);
 	                        break;
 	                    case GUITAR:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)guitar, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)guitar, DestAddress, NS[currentWave]);
 	                        break;
 	                    case DRUM:
-	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint16_t)drum, DestAddress, NS[currentWave]);
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)drum, DestAddress, NS[currentWave]);
 	                        break;
 	                }
 
