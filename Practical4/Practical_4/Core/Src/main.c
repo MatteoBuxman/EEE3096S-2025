@@ -60,6 +60,8 @@
 #define TIM2CLK 16000000 // STM Clock frequency: Hint You might want to check the ioc file
  //#define F_SIGNAL 1	// Frequency of output analog signal#define WAVEFORM_COUNT 6
 #define WAVEFORM_COUNT 6
+#define LCD_CLEAR_DISPLAY 0x01
+
 
 /* USER CODE END PD */
 
@@ -111,9 +113,9 @@ const uint32_t NS[WAVEFORM_COUNT] = {
     256,
     256,
     256,
-	75000,
-	75000,
-	75000};
+	40000,
+	40000,
+	40000};
 
 uint32_t TIM2_Ticks[WAVEFORM_COUNT];
 // TODO: Equation to calculate TIM2_Ticks
@@ -143,9 +145,9 @@ void initFSignal(void) {
     F_SIGNAL[SINE] = 1;
     F_SIGNAL[SAWTOOTH] = 1;
     F_SIGNAL[TRIANGULAR] = 1;
-    F_SIGNAL[PIANO] = calcFSignal(75000, 831744);
-    F_SIGNAL[GUITAR] = calcFSignal(75000, 466560);
-    F_SIGNAL[DRUM] = calcFSignal(75000, 499968);
+    F_SIGNAL[PIANO] = calcFSignal(40000, 831744);
+    F_SIGNAL[GUITAR] = calcFSignal(40000, 466560);
+    F_SIGNAL[DRUM] = calcFSignal(40000, 499968);
 }
 
 /* USER CODE END 0 */
@@ -205,7 +207,14 @@ int main(void)
   __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC1);
   /* USER CODE END 2 */
 
-  return 0;
+  /* Infinite loop */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
 
 }
 
@@ -514,7 +523,7 @@ void EXTI0_IRQHandler(void){
 	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)drum, DestAddress, NS[currentWave]);
 	                        break;
 	                }
-
+	                lcd_command(LCD_CLEAR_DISPLAY);
 	                // Update LCD
 	                lcd_putstring(waveformNames[currentWave]);
 

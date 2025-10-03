@@ -2,8 +2,9 @@
 
 % --- Parameters ---
    % your .inc file
-Fs = 75000/11;              % Example: effective sample rate (Hz)
-T_total = 10;               % total playback time in seconds (optional override)
+Fs = 40000/11;              % Example: effective sample rate (Hz)
+T_total = 10;       
+% total playback time in seconds (optional override)
 
 % --- Read file ---
 rawText = fileread(filename);
