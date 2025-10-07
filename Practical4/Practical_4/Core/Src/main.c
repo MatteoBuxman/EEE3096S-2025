@@ -41,7 +41,7 @@
 //Piano.wav Duration       : 00:00:18.86 = 831744 samples = 1414.53 CDDA sectors
 #include "piano.inc"
 
-//Following three have 256 samples
+//Following three have 128 samples, we will play them back at 500Hz, meaning a play back sample rate of 64kHz.
 #include "saw.inc"
 #include "sine.inc"
 #include "triangle.inc"
@@ -56,9 +56,12 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 // TODO: Add values for below variables
-#define NS        // Number of samples in LUT
-#define TIM2CLK   // STM Clock frequency: Hint You might want to check the ioc file
-#define F_SIGNAL  	// Frequency of output analog signal
+//#define NS 256   // Number of samples in LUT
+#define TIM2CLK 16000000 // STM Clock frequency: Hint You might want to check the ioc file
+ //#define F_SIGNAL 1	// Frequency of output analog signal#define WAVEFORM_COUNT 6
+#define WAVEFORM_COUNT 6
+#define LCD_CLEAR_DISPLAY 0x01
+
 
 /* USER CODE END PD */
 
@@ -75,15 +78,52 @@ DMA_HandleTypeDef hdma_tim2_ch1;
 /* USER CODE BEGIN PV */
 // TODO: Add code for global variables, including LUTs
 
+
+
+uint16_t lastPress = 0;
+
+const uint16_t debounceDelay = 200;
+
+const char* waveformNames[] = {
+    "Sine",
+    "Sawtooth",
+    "Triangular",
+    "Piano",
+    "Guitar",
+    "Drum"
+};
+
+/* USER CODE BEGIN PTD */
+typedef enum {
+    SINE = 0,
+    SAWTOOTH,
+    TRIANGULAR,
+    PIANO,
+    GUITAR,
+    DRUM
+} WaveType;
+WaveType currentWave = SINE;
+/* USER CODE END PTD */
+float F_SIGNAL[WAVEFORM_COUNT];
+
 //triangle, sine, saw, piano, guitar, drum
 const uint32_t NS_values[] = {256, 256, 256, 75000, 75000, 75000};
 const* waveforms[] = {"Triangle", "Sine", "Saw", "Piano", "Guitar", "Drum"};
 
 
 
+const uint32_t NS[WAVEFORM_COUNT] = {
+    256,
+    256,
+    256,
+	40000,
+	40000,
+	40000};
+
+uint32_t TIM2_Ticks[WAVEFORM_COUNT];
 
 // TODO: Equation to calculate TIM2_Ticks
-uint32_t TIM2_Ticks = 0; // How often to write new LUT value
+
 uint32_t DestAddress = (uint32_t) &(TIM3->CCR3); // Write LUT TO TIM3->CCR3 to modify PWM duty cycle
 
 
@@ -106,6 +146,15 @@ void EXTI0_IRQHandler(void);
 uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size);
 
 
+void initFSignal(void) {
+    F_SIGNAL[SINE] = 2000;
+    F_SIGNAL[SAWTOOTH] = 500;
+    F_SIGNAL[TRIANGULAR] = 500;
+    F_SIGNAL[PIANO] = 0.05;
+    F_SIGNAL[GUITAR] = 0.1;
+    F_SIGNAL[DRUM] = 0.1;
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -123,9 +172,11 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
+  initFSignal();
   /* USER CODE BEGIN Init */
-
+  for(int i = 0; i < WAVEFORM_COUNT; i++) {
+          TIM2_Ticks[i] = (uint32_t)(TIM2CLK / (F_SIGNAL[i] * NS[i]));
+  }
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -150,25 +201,26 @@ int main(void)
   HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_1);
 
   // TODO: Start DMA in IT mode on TIM2->CH1. Source is LUT and Dest is TIM3->CCR3; start with Sine LUT
-
+  TIM2->ARR = TIM2_Ticks[currentWave];
+  HAL_TIM_OC_Start(&htim2, TIM_CHANNEL_1);
+  HAL_DMA_Start_IT(&hdma_tim2_ch1,(uint32_t)Sine_LUT, DestAddress, NS[currentWave]);
   // TODO: Write current waveform to LCD(Sine is the first waveform)
+  	init_LCD();
+  	lcd_putstring(waveformNames[currentWave]);
 
   // TODO: Enable DMA (start transfer from LUT to CCR)
-
+  __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC1);
   /* USER CODE END 2 */
 
-  return 0;
+  /* Infinite loop */
+  while (1)
+  {
+    /* USER CODE END WHILE */
 
-}
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
 
-
-uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size){
-
-	if(selected_sample_size > original_file_size) return 0;
-
-	static const uint16_t sampling_freq = 44100;
-
-	return ((float)selected_sample_size / (float)original_file_size) * sampling_freq;
 }
 
 /**
@@ -273,8 +325,8 @@ static void MX_TIM2_Init(void)
   hdma_tim2_ch1.Init.Direction = DMA_MEMORY_TO_PERIPH; // Memory -> TIM3->CCR3
   hdma_tim2_ch1.Init.PeriphInc = DMA_PINC_DISABLE;    // Peripheral address fixed
   hdma_tim2_ch1.Init.MemInc = DMA_MINC_ENABLE;        // Memory address increments
-  hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-  hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+  hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;  // Changed from WORD
+  hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
   hdma_tim2_ch1.Init.Mode = DMA_CIRCULAR;            // Repeat LUT automatically
   hdma_tim2_ch1.Init.Priority = DMA_PRIORITY_HIGH;
   hdma_tim2_ch1.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
@@ -312,7 +364,7 @@ static void MX_TIM3_Init(void)
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 0;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 65535;
+  htim3.Init.Period = 399;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
@@ -335,7 +387,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 50000;
+  sConfigOC.Pulse = 200;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -357,6 +409,7 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
+
 
   /* DMA interrupt init */
   /* DMA1_Stream5_IRQn interrupt configuration */
@@ -426,16 +479,57 @@ static void MX_GPIO_Init(void)
 void EXTI0_IRQHandler(void){
 
 	// TODO: Debounce using HAL_GetTick()
-
+	uint32_t currentTime = HAL_GetTick();
 
 	// TODO: Disable DMA transfer and abort IT, then start DMA in IT mode with new LUT and re-enable transfer
 	// HINT: Consider using C's "switch" function to handle LUT changes
+	if ((currentTime - lastPress) > debounceDelay)
+	    {
+	        // Update lastButtonPress with current time
+	        lastPress = currentTime;
+
+	        __HAL_TIM_DISABLE_DMA(&htim2, TIM_DMA_CC1);
+	                HAL_DMA_Abort_IT(&hdma_tim2_ch1);
 
 
+	                currentWave = (WaveType)((currentWave + 1) % WAVEFORM_COUNT);
 
 
-	HAL_GPIO_EXTI_IRQHandler(Button0_Pin); // Clear interrupt flags
-}
+	                TIM2->ARR = TIM2_Ticks[currentWave];
+
+
+	                switch(currentWave)
+	                {
+	                    case SINE:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Sine_LUT, DestAddress, NS[currentWave]);
+	                        break;
+	                    case SAWTOOTH:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Saw_LUT, DestAddress, NS[currentWave]);
+	                        break;
+	                    case TRIANGULAR:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)Triangle_LUT, DestAddress, NS[currentWave]);
+	                        break;
+	                    case PIANO:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)piano, DestAddress, NS[currentWave]);
+	                        break;
+	                    case GUITAR:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)guitar, DestAddress, NS[currentWave]);
+	                        break;
+	                    case DRUM:
+	                        HAL_DMA_Start_IT(&hdma_tim2_ch1, (uint32_t)drum, DestAddress, NS[currentWave]);
+	                        break;
+	                }
+	                lcd_command(LCD_CLEAR_DISPLAY);
+	                // Update LCD
+	                lcd_putstring(waveformNames[currentWave]);
+
+	                // Restart DMA
+	                __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC1);
+	            }
+
+	            HAL_GPIO_EXTI_IRQHandler(Button0_Pin);
+	        }
+
 /* USER CODE END 4 */
 
 /**
