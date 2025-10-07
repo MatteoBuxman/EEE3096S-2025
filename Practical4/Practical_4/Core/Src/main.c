@@ -41,7 +41,7 @@
 //Piano.wav Duration       : 00:00:18.86 = 831744 samples = 1414.53 CDDA sectors
 #include "piano.inc"
 
-//Following three have 256 samples
+//Following three have 128 samples, we will play them back at 500Hz, meaning a play back sample rate of 64kHz.
 #include "saw.inc"
 #include "sine.inc"
 #include "triangle.inc"
@@ -118,8 +118,9 @@ const uint32_t NS[WAVEFORM_COUNT] = {
 	40000};
 
 uint32_t TIM2_Ticks[WAVEFORM_COUNT];
+
 // TODO: Equation to calculate TIM2_Ticks
-//uint32_t TIM2_Ticks  = (TIM2CLK / (F_SIGNAL * NS)) ; // How often to write new LUT value
+
 uint32_t DestAddress = (uint32_t) &(TIM3->CCR3); // Write LUT TO TIM3->CCR3 to modify PWM duty cycle
 
 
@@ -141,13 +142,14 @@ void EXTI0_IRQHandler(void);
 //The play back frequency of the chosen audio track
 uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size);
 
+
 void initFSignal(void) {
-    F_SIGNAL[SINE] = 1;
-    F_SIGNAL[SAWTOOTH] = 1;
-    F_SIGNAL[TRIANGULAR] = 1;
-    F_SIGNAL[PIANO] = calcFSignal(40000, 831744);
-    F_SIGNAL[GUITAR] = calcFSignal(40000, 466560);
-    F_SIGNAL[DRUM] = calcFSignal(40000, 499968);
+    F_SIGNAL[SINE] = 2000;
+    F_SIGNAL[SAWTOOTH] = 500;
+    F_SIGNAL[TRIANGULAR] = 500;
+    F_SIGNAL[PIANO] = 0.05;
+    F_SIGNAL[GUITAR] = 0.1;
+    F_SIGNAL[DRUM] = 0.1;
 }
 
 /* USER CODE END 0 */
@@ -171,7 +173,7 @@ int main(void)
   /* USER CODE BEGIN Init */
   for(int i = 0; i < WAVEFORM_COUNT; i++) {
           TIM2_Ticks[i] = (uint32_t)(TIM2CLK / (F_SIGNAL[i] * NS[i]));
-      }
+  }
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -216,16 +218,6 @@ int main(void)
   }
   /* USER CODE END 3 */
 
-}
-
-
-uint16_t calcFSignal(uint32_t selected_sample_size, uint32_t original_file_size){
-
-	if(selected_sample_size > original_file_size) return 0;
-
-	static const uint16_t sampling_freq = 44100;
-
-	return ((float)selected_sample_size / (float)original_file_size) * sampling_freq;
 }
 
 /**
@@ -330,8 +322,8 @@ static void MX_TIM2_Init(void)
   hdma_tim2_ch1.Init.Direction = DMA_MEMORY_TO_PERIPH; // Memory -> TIM3->CCR3
   hdma_tim2_ch1.Init.PeriphInc = DMA_PINC_DISABLE;    // Peripheral address fixed
   hdma_tim2_ch1.Init.MemInc = DMA_MINC_ENABLE;        // Memory address increments
-  hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-  hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+  hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;  // Changed from WORD
+  hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
   hdma_tim2_ch1.Init.Mode = DMA_CIRCULAR;            // Repeat LUT automatically
   hdma_tim2_ch1.Init.Priority = DMA_PRIORITY_HIGH;
   hdma_tim2_ch1.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
@@ -369,7 +361,7 @@ static void MX_TIM3_Init(void)
   htim3.Instance = TIM3;
   htim3.Init.Prescaler = 0;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 65535;
+  htim3.Init.Period = 399;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
@@ -392,7 +384,7 @@ static void MX_TIM3_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 50000;
+  sConfigOC.Pulse = 200;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -414,6 +406,7 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
+
 
   /* DMA interrupt init */
   /* DMA1_Stream5_IRQn interrupt configuration */

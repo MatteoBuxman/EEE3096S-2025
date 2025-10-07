@@ -4,7 +4,7 @@
 
 const fs = require("fs");
 
-const NS = 256;          // number of samples per cycle
+const NS = 128;          // number of samples per cycle
 const MAX = 4095;        // 12-bit resolution max value
 const HALF = MAX / 2;    // center point for sine
 
